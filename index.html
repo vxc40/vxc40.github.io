@@ -98,7 +98,8 @@ img {vertical-align: middle; max-height: 100%; max-width: 100%;}
 </style>
 </head>
 <body>
-
+  <h1 style="text-align: center; color: white;">VOLVO XC40 T5 TwE R-Design</h1>
+  <div style="text-align: center; color: white;"><a style="text-align: center; color: white;" href="https://autoscout24.ch/de/d/volvo-xc40-suv--gelaendewagen-2020-occasion-10822755" target="_blank">Inserat im Autoscout24</a></div>
 <div class="slideshow-container">
 
 <div class="mySlides fade">
@@ -154,7 +155,6 @@ img {vertical-align: middle; max-height: 100%; max-width: 100%;}
 
 </div>
 <br>
-
 <div style="text-align:center">
   <span class="dot" onclick="currentSlide(1)"></span> 
   <span class="dot" onclick="currentSlide(2)"></span> 
@@ -185,6 +185,14 @@ showSlides(slideIndex);
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
+
+window.onload = function() {
+    interval = 8000;
+    var infiniteLoop = setInterval(function(){
+      plusSlides(1)
+    }, interval);
+}
+
 
 function currentSlide(n) {
   showSlides(slideIndex = n);
