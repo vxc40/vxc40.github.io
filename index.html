@@ -4,8 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volvo XC40</title>
+    <style>
+        @keyframes fadey { 
+        0% { opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { opacity: 0; }
+        }
+        html, body {
+            height: 100%;
+        }
+        body { 
+        font-family: Avenir, Arial, sans-serif; 
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        background: #000;
+        }
+        figure {
+            margin: 0; height: 100%;
+        }
+        figure#slideshow { 
+        width: 100%; 
+        position: relative; 
+        cursor: pointer;
+        overflow: hidden;
+        }
+        figure#slideshow div { 
+        position: absolute; 
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%; 
+        height: 100%; 
+        opacity: 0; 
+        background-size: cover;
+        background-position-x: center;
+        background-position-y: center;
+        }
+        figure#slideshow div:first-child { position: relative; }
+
+        #container:fullscreen { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        background: #000; 
+        }
+        #container:-moz-full-screen figure, #container:-ms-full-screen figure, #container:-webkit-fullscreen figure, #container:fullscreen figure { 
+        width: 100%;
+        margin: 0;
+        background: #000; 
+        }
+        :-webkit-full-screen { 
+        width: 100%; height: 100%; 
+        }
+        *:-moz-full-screen { 
+        background: #000; 
+        }
+        *:-webkit-full-screen { 
+        background: #000; 
+        }
+    </style>
 </head>
 <body>
-    Images
+
+<!-- click to bring the slideshow in and out of fullscreen mode -->
+<figure id="container" onclick="fullScreen(this)">
+
+  <figure id="slideshow">
+    <div style="background-image:url('./design/vxc40_01-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_02-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_07-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_03-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_04-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_11-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_08-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_19-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_05-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_06-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_12-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_13-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_09-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_17-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_10-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_15-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_14-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_16-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_18-min.jpg')"></div>
+    <div style="background-image:url('./design/vxc40_20-min.jpg')"></div>
+  </figure>
+</figure>
+<script>
+    function cancelFullScreen() {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        } else if (document.msCancelFullScreen) {
+            document.msCancelFullScreen();
+        }
+        link = document.getElementById("container");
+        link.removeAttribute("onclick");
+        link.setAttribute("onclick", "fullScreen(this)");
+    }
+
+    function fullScreen(element) {
+        if (element.requestFullScreen) {
+            element.requestFullScreen();
+        } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        }
+        link = document.getElementById("container");
+        link.removeAttribute("onclick");
+        link.setAttribute("onclick", "cancelFullScreen()");
+    }
+
+    window.onload = function() {
+        imgs = document.getElementById('slideshow').children;
+        interval = 8000;
+        currentPic = 0;
+        imgs[currentPic].style.webkitAnimation = 'fadey '+interval+'ms';
+        imgs[currentPic].style.animation = 'fadey '+interval+'ms';
+        var infiniteLoop = setInterval(function(){
+            imgs[currentPic].removeAttribute('style');
+            if ( currentPic == imgs.length - 1) { currentPic = 0; } else { currentPic++; }
+            imgs[currentPic].style.webkitAnimation = 'fadey '+interval+'ms';
+            imgs[currentPic].style.animation = 'fadey '+interval+'ms';
+        }, interval);
+    }
+</script>
 </body>
 </html>
